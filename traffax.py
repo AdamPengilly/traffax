@@ -13,15 +13,14 @@ import numpy as np
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import seaborn as sns 
-import shapefile as shp
+#import seaborn as sns 
+#import shapefile as shp
 # import joypy
 
 import folium
 import folium.plugins as plugins
-from folium import plugins
 from streamlit_folium import folium_static
-import folium
+
 
 #import ipywidgets
 #from ipywidgets import interact, interactive, fixed, interact_manual
