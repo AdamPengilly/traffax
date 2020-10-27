@@ -75,54 +75,14 @@ geo_json_borough = load_geo_json()
     
 @st.cache
 def load_london_df():
-    #compiled london dataframe
-    path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-    filename = 'london_pickle_rev2'
+    #compiled london dataframe (shortened to only features used in this app)
+    path = '/Users/adampengilly/Desktop/Projects/'
+    filename = 'london_slim_pickle'
     london = pickle.load(open(path+filename, 'rb'))
-    london.Veh_Type_Grouped = london.Veh_Type_Grouped.map(lambda x : ", ".join(x)) #moved into function for heatmap veh slection
+    london.Veh_Type_Grouped = london.Veh_Type_Grouped.map(lambda x : ", ".join(x))
     return london
 london = load_london_df()
 
-# @st.cache
-# def load_london_cas():
-#     path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-#     filename = 'london_cas_pickle'
-#     london_cas = pickle.load(open(path+filename, 'rb'))
-#     return london_cas
-# london_cas = load_london_cas()
-
-@st.cache
-def load_london_no_peds():
-    path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-    filename = 'london_pickle_rev2_no_peds'
-    london_no_peds = pickle.load(open(path+filename, 'rb'))
-    return london_no_peds
-london_no_peds = load_london_no_peds()
-
-@st.cache
-def load_acc_0515():
-    path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-    filename = 'acc_0515_rev3'
-    acc_0515 = pickle.load(open(path+filename, 'rb'))
-    return acc_0515
-acc_0515 = load_acc_0515()
-
-@st.cache
-def load_veh_london():
-    path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-    filename = 'veh_london_pickle'
-    veh_london = pickle.load(open(path+filename, 'rb'))
-    return veh_london
-veh_london = load_veh_london()
-
-# @st.cache
-# def transport_pick():
-#     #list of vehicle combinations. To be selected in the plotting widget below
-#     #Convert the list of vehicle types in each cell to a single string
-#     transport_pick = [x for x in london.Veh_Type_Grouped.unique() if x.count(',') < 2]
-#     transport_pick.append('ALL')
-#     return transport_pick
-# transport_pick = transport_pick()
 
 @st.cache
 def trans_pick_short():
