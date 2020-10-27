@@ -52,14 +52,7 @@ import pickle
 
 
 #CREATE A FUNCTION TO LOAD DATA SO CAN CACHE DATA SUCH THAT IT DOESN'T HAVE TO BE RELOADED EACH TIME
-@st.cache
-def load_df_traffic():
-    #the edited df_traffic dataframe
-    path = '/Users/adampengilly/Desktop/Capstone Data/pickles/'
-    filename = 'df_traffic_filled_pickle_rev2'
-    df_traffic =pickle.load(open(path+filename, 'rb'))
-    return df_traffic
-df_traffic = load_df_traffic()
+
 
 @st.cache
 def load_geo_json():
