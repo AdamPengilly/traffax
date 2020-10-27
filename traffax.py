@@ -24,7 +24,7 @@ from streamlit_folium import folium_static
 
 #import ipywidgets
 #from ipywidgets import interact, interactive, fixed, interact_manual
-import scikitplot as skplt
+#import scikitplot as skplt
 
 import json
 
@@ -35,7 +35,7 @@ import json
 # from statsmodels.tsa.seasonal import seasonal_decompose
 
 import datetime
-from datetime import timedelta
+#from datetime import timedelta
 
 import pickle
 # from tqdm import tqdm
