@@ -54,17 +54,17 @@ import pickle
 #CREATE A FUNCTION TO LOAD DATA SO CAN CACHE DATA SUCH THAT IT DOESN'T HAVE TO BE RELOADED EACH TIME
 
 
-@st.cache
-def load_geo_json():
-    # load geo_json (for Choropleth map)
-    with open('/Users/adampengilly/Desktop/Projects/traffax/london_boroughs.json') as f:
-        geojson_borough = json.load(f)
-    # add feature 'id' local_authority_name code to geojson (so can be matched with dataframe)
-    # access features
-    for i in geojson_borough['features']:
-        i['id'] = i['properties']['name']
-    return geojson_borough
-geo_json_borough = load_geo_json()
+# @st.cache
+# def load_geo_json():
+#     # load geo_json (for Choropleth map)
+#     with open('/Users/adampengilly/Desktop/Projects/traffax/london_boroughs.json') as f:
+#         geojson_borough = json.load(f)
+#     # add feature 'id' local_authority_name code to geojson (so can be matched with dataframe)
+#     # access features
+#     for i in geojson_borough['features']:
+#         i['id'] = i['properties']['name']
+#     return geojson_borough
+# geo_json_borough = load_geo_json()
     
 @st.cache
 def load_london_df():
