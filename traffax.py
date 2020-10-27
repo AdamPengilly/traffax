@@ -66,8 +66,8 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
 
 #START OF PAGE INPUT...
 
-veh_select = st.sidebar.selectbox('Vehicle Combination', transport_pick_short)
-map_select = st.sidebar.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
+veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
+map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
 # other maps include 'Thunderforest.Neighbourhood', 'CyclOSM', 'Stamen.Watercolor', 
 # BUT as these are custom... need to add 'attr' parameter to give credit
