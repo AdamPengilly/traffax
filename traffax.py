@@ -50,7 +50,7 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
                 
             lat_long_monthly.append(temp.loc[idx][['Latitude', 'Longitude']].values.tolist())
    
-    f = folium.Figure(width=1000, height=700) #for some reason the map is too small in this notebook and can't be rescaled. Adding this figures is a way to allow resizing
+    f = folium.Figure(width=500, height=400) #for some reason the map is too small in this notebook and can't be rescaled. Adding this figures is a way to allow resizing
     m = folium.Map([51.5080, -0.1], tiles=map_type, zoom_start=11)
     f.add_child(m)
     
@@ -78,7 +78,6 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 
 
 folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
-
 
 
 
