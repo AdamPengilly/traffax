@@ -57,7 +57,7 @@ import pickle
 @st.cache
 def load_geo_json():
     # load geo_json (for Choropleth map)
-    with open('/Users/adampengilly/Desktop/Capstone Data/2417_4263_bundle_archive/london_boroughs.json') as f:
+    with open('/Users/adampengilly/Desktop/Projects/traffax/london_boroughs.json') as f:
         geojson_borough = json.load(f)
     # add feature 'id' local_authority_name code to geojson (so can be matched with dataframe)
     # access features
@@ -69,7 +69,7 @@ geo_json_borough = load_geo_json()
 @st.cache
 def load_london_df():
     #compiled london dataframe (shortened to only features used in this app)
-    path = '/Users/adampengilly/Desktop/Projects/'
+    path = '/Users/adampengilly/Desktop/Projects/traffax/'
     filename = 'london_slim_pickle'
     london = pickle.load(open(path+filename, 'rb'))
     london.Veh_Type_Grouped = london.Veh_Type_Grouped.map(lambda x : ", ".join(x))
