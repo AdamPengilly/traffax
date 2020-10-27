@@ -13,69 +13,16 @@ import numpy as np
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-#import seaborn as sns 
-#import shapefile as shp
-# import joypy
-
 import folium
 import folium.plugins as plugins
 from streamlit_folium import folium_static
-
-
-#import ipywidgets
-#from ipywidgets import interact, interactive, fixed, interact_manual
-#import scikitplot as skplt
-
 import json
-
-# from scipy import stats
-# import statsmodels.api as sm  
-# from statsmodels.tsa.stattools import acf, pacf
-# from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-# from statsmodels.tsa.seasonal import seasonal_decompose
-
 import datetime
-#from datetime import timedelta
-
 import pickle
-# from tqdm import tqdm
 
-# import os
-# import glob
-
-# from sklearn.preprocessing import PowerTransformer
-# from sklearn.metrics import mean_squared_error
-
-
-
-# -*- coding: utf-8 -*-
-
-
-#CREATE A FUNCTION TO LOAD DATA SO CAN CACHE DATA SUCH THAT IT DOESN'T HAVE TO BE RELOADED EACH TIME
-
-
-# @st.cache
-# def load_geo_json():
-#     # load geo_json (for Choropleth map)
-#     with open('/Users/adampengilly/Desktop/Projects/traffax/london_boroughs.json') as f:
-#         geojson_borough = json.load(f)
-#     # add feature 'id' local_authority_name code to geojson (so can be matched with dataframe)
-#     # access features
-#     for i in geojson_borough['features']:
-#         i['id'] = i['properties']['name']
-#     return geojson_borough
-# geo_json_borough = load_geo_json()
+#CLOAD IN DATA
     
-@st.cache
-def load_london_df():
-    #compiled london dataframe (shortened to only features used in this app)
-    path = '/Users/adampengilly/Desktop/Projects/traffax/'
-    filename = 'london_slim_pickle'
-    london = pickle.load(open(path+filename, 'rb'))
-    london.Veh_Type_Grouped = london.Veh_Type_Grouped.map(lambda x : ", ".join(x))
-    return london
-london = load_london_df()
-
+london = pickle.load(open('london_slim_pickle.pkl', 'rb'))
 
 @st.cache
 def trans_pick_short():
