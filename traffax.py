@@ -66,15 +66,17 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
 
 #START OF PAGE INPUT...
 
+st.title("London Traffic Accident Data (2005-15)")
+#st.header("header")
+#st.subheader("subheader")
+
 veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
 map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
 # other maps include 'Thunderforest.Neighbourhood', 'CyclOSM', 'Stamen.Watercolor', 
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
-st.title("London Traffic Accident Data (2005-15)")
-#st.header("header")
-#st.subheader("subheader")
+
 folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
 
 
