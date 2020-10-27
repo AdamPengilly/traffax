@@ -66,7 +66,7 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
 
 #START OF PAGE INPUT...
 
-st.title("London Traffic Accident Data (2005-15)")
+st.title("London Traffic Accident Map (2005-15)")
 #st.header("header")
 #st.subheader("subheader")
 
@@ -77,7 +77,7 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
 
-folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
+folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=550, height=400)
 
 
 
