@@ -22,7 +22,7 @@ import pickle
 
 #CLOAD IN DATA
     
-london = pickle.load(open('london_slim_pickle.pkl', 'rb'))
+london = pickle.load(open('london_slim_pickle', 'rb'))
 
 @st.cache
 def trans_pick_short():
