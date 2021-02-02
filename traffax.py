@@ -39,7 +39,6 @@ transport_pick_short = trans_pick_short()
 
 #Function that plots accident locations by vehicle type over London (for entire time period)
 def acc_by_vehtype_map(veh_types='Car, Car', fig_size=12):
-    %matplotlib inline
     fig = plt.figure(figsize=(fig_size,fig_size))
     ax = fig.add_subplot()    
     ax.get_xaxis().set_visible(False)
