@@ -67,8 +67,9 @@ def acc_by_vehtype_map(veh_types='Car, Car', fig_size=12):
     else:
         temp = london[london.Veh_Type_Grouped == veh_types]
         
-    return plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
+    ax= plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
 
+    return plt.show()
 
 
 #Function that plots accidents by vehicle type over london over time
@@ -137,7 +138,7 @@ acc_by_vehtype_map(veh_types=veh_select, fig_size=fig_size_select)
 
 
 #HEATMAP
-folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=fig_size_select*54, height=fig_size_select*50)
+folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
 
 
 
