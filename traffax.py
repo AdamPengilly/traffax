@@ -101,7 +101,7 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 
 #LONDON ACCIDENT PLOT
 
-ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
+
 if veh_select == 'ALL':
     temp = london   
 elif veh_select == 'Pedal cycle (ALL)':
@@ -117,11 +117,13 @@ elif veh_select == 'LGV/HGV (ALL)':
 else:
     temp = london[london.Veh_Type_Grouped == veh_select]
 
+
 fig = plt.figure(figsize=(12,12))
-ax = fig.add_subplot()
+ax = fig.add_subplot()    
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 ax.axis('off')
+ax = plt.scatter(london['Longitude'], london['Latitude'], s =4, color='blue')
 ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
 
 st.pyplot(fig)
