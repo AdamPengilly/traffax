@@ -138,20 +138,20 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 #acc_by_vehtype_map(veh_types=veh_select, fig_size=12)
 
 
-if veh_types == 'ALL':
+if veh_select == 'ALL':
     temp = london   
-elif veh_types == 'Pedal cycle (ALL)':
+elif veh_select == 'Pedal cycle (ALL)':
     temp = london[london.Veh_Type_Grouped.str.contains('Pedal cycle')]    
-elif veh_types == 'Car (ALL)':
+elif veh_select == 'Car (ALL)':
     temp = london[london.Veh_Type_Grouped.str.contains('Car')]
-elif veh_types == 'Motorcycle (ALL)':
+elif veh_select == 'Motorcycle (ALL)':
     temp = london[london.Veh_Type_Grouped.str.contains('Motorcycle')]
-elif veh_types == 'Bus/Coach (ALL)':
+elif veh_select == 'Bus/Coach (ALL)':
     temp = london[london.Veh_Type_Grouped.str.contains('Bus')]    
-elif veh_types == 'LGV/HGV (ALL)':
+elif veh_select == 'LGV/HGV (ALL)':
     temp = london[london.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
 else:
-    temp = london[london.Veh_Type_Grouped == veh_types]
+    temp = london[london.Veh_Type_Grouped == veh_select]
 
 fig = plt.figure(figsize=(12,12))
 ax = fig.add_subplot()
