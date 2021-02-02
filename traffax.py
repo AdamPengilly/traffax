@@ -124,7 +124,7 @@ ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 ax.axis('off')
 ax = plt.scatter(london['Longitude'], london['Latitude'], s =4, color='blue')
-ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
+#ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
 
 st.pyplot(fig)
 
