@@ -67,9 +67,9 @@ def acc_by_vehtype_map(veh_types='Car, Car', fig_size=12):
     else:
         temp = london[london.Veh_Type_Grouped == veh_types]
         
-    ax= plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
+    ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
     
-    return fig
+    fig.show()
 
 
 
@@ -135,7 +135,7 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
 #LONDON ACCIDENT PLOT
-st.pylot(acc_by_vehtype_map(veh_types=veh_select, fig_size=12))
+acc_by_vehtype_map(veh_types=veh_select, fig_size=12)
 
 #HEATMAP
 folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
@@ -152,12 +152,12 @@ folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, 
 
 
 #UK MAP
-#fig = plt.figure(figsize=(6,10))
-#ax = fig.add_subplot()
-#ax.get_xaxis().set_visible(False)
-#ax.get_yaxis().set_visible(False)
-#ax.axis('off')
-#ax = plt.scatter(acc_0515['Longitude'], acc_0515['Latitude'], s =0.0001)
+fig = plt.figure(figsize=(6,10))
+ax = fig.add_subplot()
+ax.get_xaxis().set_visible(False)
+ax.get_yaxis().set_visible(False)
+ax.axis('off')
+ax = plt.scatter(acc_0515['Longitude'], acc_0515['Latitude'], s =0.0001)
 
-#st.pyplot(fig)
+st.pyplot(fig)
 
