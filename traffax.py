@@ -37,9 +37,8 @@ def trans_pick_short():
     return tuple(transport_pick_short)
 transport_pick_short = trans_pick_short()
 
-
 #Function that plots accidents by vehicle type over london over time
-'''def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):  
+def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):  
     
     time_index = []
     lat_long_monthly =[]
@@ -82,30 +81,7 @@ transport_pick_short = trans_pick_short()
     )
     hm.add_to(m)
     
-    return m'''
-
-#Function that plots accidents by vehicle type over london over time
-def heatmap_ts(df, veh_types='ALL', map_type='OpenStreetMap'):  
-    
-    time_index = []
-    lat_long_monthly =[]
-    for year in range(2005,2016):
-        for month in range(1,13):
-            idx = "'"+str(year)+', '+str(month)+"'"
-            time_index.append(idx)                
-            lat_long_monthly.append(df.loc[idx][['Latitude', 'Longitude']].values.tolist())
-   
-    f = folium.Figure(width=500, height=400) #for some reason the map is too small in this notebook and can't be rescaled. Adding this figures is a way to allow resizing
-    m = folium.Map([51.5080, -0.1], tiles=map_type, zoom_start=11)
-    f.add_child(m)
-    
-    hm = plugins.HeatMapWithTime(
-        lat_long_monthly,
-        index=time_index,
-        auto_play=True,
-        max_opacity=0.4
-    )
-    hm.add_to(m)
+    return m
 
 
 
@@ -156,7 +132,7 @@ st.pyplot(fig)
 
 
 #HEATMAP
-folium_static(heatmap_ts(df=temp, veh_types=veh_select, map_type=map_select), width=1000, height=800)
+folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=1000, height=800)
 
 
 
