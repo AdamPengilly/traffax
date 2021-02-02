@@ -156,7 +156,7 @@ st.pyplot(fig)
 
 
 #HEATMAP
-folium_static(heatmap_ts(df=temp, veh_types=veh_select, map_type=map_select), width=900, height=800)
+folium_static(heatmap_ts(df=temp, veh_types=veh_select, map_type=map_select), width=1000, height=800)
 
 
 
