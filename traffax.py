@@ -90,9 +90,9 @@ st.title("London Traffic Accident Map (2005-15)")
 #st.header("header")
 #st.subheader("subheader")
 
-fig_size_list = range(1,10,1)
+#fig_size_list = range(1,10,1)
 
-fig_size_select = st.selectbox('Fig. Size', fig_size_list)
+#fig_size_select = st.selectbox('Fig. Size', fig_size_list)
 veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
 map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
@@ -118,7 +118,7 @@ else:
     temp = london[london.Veh_Type_Grouped == veh_select]
 
 
-fig = plt.figure(figsize=(fig_size_select+9,fig_size_select+9))
+fig = plt.figure(figsize=(15,15))
 ax = fig.add_subplot()    
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
@@ -131,7 +131,7 @@ st.pyplot(fig)
 
 
 #HEATMAP
-folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
+folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=1200, height=800)
 
 
 
