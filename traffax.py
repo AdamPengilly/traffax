@@ -125,9 +125,9 @@ st.title("London Traffic Accident Map (2005-15)")
 #st.header("header")
 #st.subheader("subheader")
 
-fig_size_list = range(1,10,1)
+#fig_size_list = range(1,10,1)
 
-fig_size_select = st.selectbox('Fig. Size', round(fig_size_list*1.5))
+#fig_size_select = st.selectbox('Fig. Size', round(fig_size_list*1.5))
 veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
 map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
@@ -135,7 +135,7 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
 #LONDON ACCIDENT PLOT
-st.pylot(acc_by_vehtype_map(veh_types=veh_select, fig_size=fig_size_select))
+st.pylot(acc_by_vehtype_map(veh_types=veh_select, fig_size=12))
 
 #HEATMAP
 folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
