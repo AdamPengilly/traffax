@@ -8,21 +8,38 @@ Created on Sat Oct 24 21:35:37 2020
 
 import streamlit as st
 
-import pandas as pd
-import numpy as np
+#import pandas as pd
+#import numpy as np
 
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import folium
 import folium.plugins as plugins
 from streamlit_folium import folium_static
-import json
-import datetime
+#import json
+#import datetime
 import pickle
 
 #LOAD IN DATA
     
 london = pickle.load(open('london_slim_pickle', 'rb'))
+
+@st.cache
+def df_filter(df=london, vehicle='ALL'):
+    if vehicle == 'ALL':
+        return  london   
+    elif vehicle == 'Pedal cycle (ALL)':
+        return  df[df.Veh_Type_Grouped.str.contains('Pedal')]    
+    elif vehicle == 'Car (ALL)':
+        return  df[df.Veh_Type_Grouped.str.contains('Car')]
+    elif vehicle == 'Motorcycle (ALL)':
+        return  df[df.Veh_Type_Grouped.str.contains('Motorcycle')]
+    elif vehicle == 'Bus/Coach (ALL)':
+        return  df[df.Veh_Type_Grouped.str.contains('Bus')]    
+    elif vehicle == 'LGV/HGV (ALL)':
+        return df[df.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
+    else:
+        return  df[df.Veh_Type_Grouped == vehicle]
+
 
 @st.cache
 def trans_pick_short():
@@ -38,7 +55,8 @@ def trans_pick_short():
 transport_pick_short = trans_pick_short()
 
 #Function that plots accidents by vehicle type over london over time
-def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):  
+
+def heatmap_ts(df=london, veh_types='ALL', map_type='OpenStreetMap'):  
     
     time_index = []
     lat_long_monthly =[]
@@ -46,30 +64,9 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
         for month in range(1,13):
             idx = "'"+str(year)+', '+str(month)+"'"
             time_index.append(idx)
-            if veh_types == 'ALL':
-                temp = london
-                
-            elif veh_types == 'Pedal cycle (ALL)':
-                temp = london[london.Veh_Type_Grouped.str.contains('Pedal cycle')]
-
-            elif veh_types == 'Car (ALL)':
-                temp = london[london.Veh_Type_Grouped.str.contains('Car')]
-
-            elif veh_types == 'Motorcycle (ALL)':
-                temp = london[london.Veh_Type_Grouped.str.contains('Motorcycle')]
-
-            elif veh_types == 'Bus/Coach (ALL)':
-                temp = london[london.Veh_Type_Grouped.str.contains('Bus')]
-
-            elif veh_types == 'LGV/HGV (ALL)':
-                temp = london[london.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
-                
-            else:
-                temp = london[london.Veh_Type_Grouped == veh_types]
-                
-            lat_long_monthly.append(temp.loc[idx][['Latitude', 'Longitude']].values.tolist())
+            lat_long_monthly.append(df.loc[idx][['Latitude', 'Longitude']].values.tolist())
    
-    f = folium.Figure(width=500, height=400) #for some reason the map is too small in this notebook and can't be rescaled. Adding this figures is a way to allow resizing
+    f = folium.Figure(width=50, height=40) #for some reason the map is too small in this notebook and can't be rescaled. Adding this figures is a way to allow resizing
     m = folium.Map([51.5080, -0.1], tiles=map_type, zoom_start=11)
     f.add_child(m)
     
@@ -84,8 +81,8 @@ def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):
     return m
 
 
-
 #START OF PAGE INPUT...
+
 
 st.title("London Traffic Accident Map (2005-15)")
 #st.header("header")
@@ -95,44 +92,29 @@ st.title("London Traffic Accident Map (2005-15)")
 
 #fig_size_select = st.selectbox('Fig. Size', fig_size_list)
 veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
-map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
 # other maps include 'Thunderforest.Neighbourhood', 'CyclOSM', 'Stamen.Watercolor', 
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
+#Return a Dataframfe with the select vehicles types in
+df = df_filter(london, vehicle=veh_select)
+
 #LONDON ACCIDENT PLOT
 
-
-if veh_select == 'ALL':
-    temp = london   
-elif veh_select == 'Pedal cycle (ALL)':
-    temp = london[london.Veh_Type_Grouped.str.contains('Pedal')]    
-elif veh_select == 'Car (ALL)':
-    temp = london[london.Veh_Type_Grouped.str.contains('Car')]
-elif veh_select == 'Motorcycle (ALL)':
-    temp = london[london.Veh_Type_Grouped.str.contains('Motorcycle')]
-elif veh_select == 'Bus/Coach (ALL)':
-    temp = london[london.Veh_Type_Grouped.str.contains('Bus')]    
-elif veh_select == 'LGV/HGV (ALL)':
-    temp = london[london.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
-else:
-    temp = london[london.Veh_Type_Grouped == veh_select]
-
-
-fig = plt.figure(figsize=(20,20))
+fig = plt.figure(figsize=(25,25))
 ax = fig.add_subplot()    
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 ax.axis('off')
 ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
-ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
+ax = plt.scatter(df['Longitude'], df['Latitude'], s =1.5, color='orange')
 
 st.pyplot(fig)
 
 
-
 #HEATMAP
-folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=1000, height=800)
+map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
+folium_static(heatmap_ts(df=df, veh_types=veh_select, map_type=map_select), width=1200, height=700)
 
 
 
