@@ -135,7 +135,34 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
 #LONDON ACCIDENT PLOT
-acc_by_vehtype_map(veh_types=veh_select, fig_size=12)
+#acc_by_vehtype_map(veh_types=veh_select, fig_size=12)
+
+
+if veh_types == 'ALL':
+    temp = london   
+elif veh_types == 'Pedal cycle (ALL)':
+    temp = london[london.Veh_Type_Grouped.str.contains('Pedal cycle')]    
+elif veh_types == 'Car (ALL)':
+    temp = london[london.Veh_Type_Grouped.str.contains('Car')]
+elif veh_types == 'Motorcycle (ALL)':
+    temp = london[london.Veh_Type_Grouped.str.contains('Motorcycle')]
+elif veh_types == 'Bus/Coach (ALL)':
+    temp = london[london.Veh_Type_Grouped.str.contains('Bus')]    
+elif veh_types == 'LGV/HGV (ALL)':
+    temp = london[london.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
+else:
+    temp = london[london.Veh_Type_Grouped == veh_types]
+
+fig = plt.figure(figsize=(12,12))
+ax = fig.add_subplot()
+ax.get_xaxis().set_visible(False)
+ax.get_yaxis().set_visible(False)
+ax.axis('off')
+ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
+
+st.pyplot(fig)
+
+
 
 #HEATMAP
 folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, height=700)
@@ -152,12 +179,12 @@ folium_static(heatmap_ts(veh_types=veh_select, map_type=map_select), width=900, 
 
 
 #UK MAP
-fig = plt.figure(figsize=(6,10))
-ax = fig.add_subplot()
-ax.get_xaxis().set_visible(False)
-ax.get_yaxis().set_visible(False)
-ax.axis('off')
-ax = plt.scatter(acc_0515['Longitude'], acc_0515['Latitude'], s =0.0001)
+#fig = plt.figure(figsize=(6,10))
+#ax = fig.add_subplot()
+#ax.get_xaxis().set_visible(False)
+#ax.get_yaxis().set_visible(False)
+#ax.axis('off')
+#ax = plt.scatter(acc_0515['Longitude'], acc_0515['Latitude'], s =0.0001)
 
-st.pyplot(fig)
+#st.pyplot(fig)
 
