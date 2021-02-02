@@ -127,7 +127,7 @@ st.title("London Traffic Accident Map (2005-15)")
 
 fig_size_list = range(1,10,1)
 
-fig_size_select = st.selectbox('Fig. Size', fig_size_list*1.5)
+fig_size_select = st.selectbox('Fig. Size', round(fig_size_list*1.5))
 veh_select = st.selectbox('Vehicle Combination', transport_pick_short)
 map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 
