@@ -37,41 +37,6 @@ def trans_pick_short():
     return tuple(transport_pick_short)
 transport_pick_short = trans_pick_short()
 
-#Function that plots accident locations by vehicle type over London (for entire time period)
-def acc_by_vehtype_map(veh_types='Car, Car', fig_size=12):
-    fig = plt.figure(figsize=(fig_size,fig_size))
-    ax = fig.add_subplot()    
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-    ax.axis('off')
-    #Met Police & City of London Police - BASE LAYER (all accidents)   
-    ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
-    if veh_types == 'ALL':
-        temp = london
-        
-    elif veh_types == 'Pedal cycle (ALL)':
-        temp = london[london.Veh_Type_Grouped.str.contains('Pedal cycle')]
-        
-    elif veh_types == 'Car (ALL)':
-        temp = london[london.Veh_Type_Grouped.str.contains('Car')]
-
-    elif veh_types == 'Motorcycle (ALL)':
-        temp = london[london.Veh_Type_Grouped.str.contains('Motorcycle')]
-    
-    elif veh_types == 'Bus/Coach (ALL)':
-        temp = london[london.Veh_Type_Grouped.str.contains('Bus')]
-        
-    elif veh_types == 'LGV/HGV (ALL)':
-        temp = london[london.Veh_Type_Grouped.str.contains('LGV') | london.Veh_Type_Grouped.str.contains('HGV')]
-    
-    else:
-        temp = london[london.Veh_Type_Grouped == veh_types]
-        
-    ax = plt.scatter(temp['Longitude'], temp['Latitude'], s =1.5, color='orange')
-    
-    fig.show()
-
-
 
 #Function that plots accidents by vehicle type over london over time
 def heatmap_ts(veh_types='ALL', map_type='OpenStreetMap'):  
@@ -135,9 +100,8 @@ map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stam
 # BUT as these are custom... need to add 'attr' parameter to give credit
 
 #LONDON ACCIDENT PLOT
-#acc_by_vehtype_map(veh_types=veh_select, fig_size=12)
 
-
+ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
 if veh_select == 'ALL':
     temp = london   
 elif veh_select == 'Pedal cycle (ALL)':
