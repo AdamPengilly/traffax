@@ -55,7 +55,6 @@ def trans_pick_short():
 transport_pick_short = trans_pick_short()
 
 #Function that plots accidents by vehicle type over london over time
-
 def heatmap_ts(df=london, veh_types='ALL', map_type='OpenStreetMap'):  
     
     time_index = []
@@ -101,18 +100,19 @@ df = df_filter(london, vehicle=veh_select)
 
 #LONDON ACCIDENT PLOT
 
-fig = plt.figure(figsize=(25,25))
+fig = plt.figure(figsize=(20,20))
 ax = fig.add_subplot()    
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 ax.axis('off')
 ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
 ax = plt.scatter(df['Longitude'], df['Latitude'], s =1.5, color='orange')
-
+plt.legend(['Total', 'Selected Vehicle/s'], markerscale=3)
 st.pyplot(fig)
 
-
 #HEATMAP
+st.header("Accident Heat Map")
+st.subheader("Each frame represents a month of data for the selected vehicle/s. Zoom in to see accident spots in detail (watch out for roundabouts!)")
 map_select = st.selectbox('Map Style', ('OpenStreetMap', 'Stamen Terrain', 'Stamen Toner', 'CartoDB Dark_Matter'))
 folium_static(heatmap_ts(df=df, veh_types=veh_select, map_type=map_select), width=1200, height=700)
 
