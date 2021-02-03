@@ -107,7 +107,7 @@ ax.get_yaxis().set_visible(False)
 ax.axis('off')
 ax = plt.scatter(london['Longitude'], london['Latitude'], s =4)
 ax = plt.scatter(df['Longitude'], df['Latitude'], s =1.5, color='orange')
-plt.legend(['Total', 'Selected Vehicle/s'], markerscale=3)
+plt.legend(['Total', 'Selected Vehicle/s'], markerscale=3, fontsize=10)
 st.pyplot(fig)
 
 #HEATMAP
